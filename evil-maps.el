@@ -340,6 +340,7 @@
 (define-key evil-visual-state-map "u" 'evil-downcase)
 (define-key evil-visual-state-map "U" 'evil-upcase)
 (define-key evil-visual-state-map "z=" 'ispell-word)
+(define-key evil-visual-state-map "F" 'evil-change-whole-line)
 (define-key evil-visual-state-map "a" evil-outer-text-objects-map)
 (define-key evil-visual-state-map "i" evil-inner-text-objects-map)
 (define-key evil-visual-state-map (kbd "<insert>") 'undefined)

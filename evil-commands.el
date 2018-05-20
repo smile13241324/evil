@@ -1379,6 +1379,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   :keep-visual t
   (interactive "<R><x>")
   ;; act linewise in Visual state
+  (message "evil-delete-line %S %S %S %S" beg end type (evil-visual-state-p))
   (let* ((beg (or beg (point)))
          (end (or end beg)))
     (when (evil-visual-state-p)
@@ -1489,9 +1490,11 @@ of the block."
         (opoint (save-excursion
                   (goto-char beg)
                   (line-beginning-position))))
+    (message "evil-change-before %S %S %S %S" beg end type (evil-visual-state-p))
     (unless (eq evil-want-fine-undo t)
       (evil-start-undo-step))
     (funcall delete-func beg end type register yank-handler)
+    (message "evil-change-after %S %S %S %S" beg end type (evil-visual-state-p))
     (cond
      ((eq type 'line)
       (if ( = opoint (point))
@@ -1508,6 +1511,7 @@ of the block."
   (interactive "<R><x><y>")
   (evil-change beg end type register yank-handler #'evil-delete-line))
 
+TODO: Evil change whole line arbeitet korrekt im falle von S aber im Falle von vS fehlt die Zeilen Expansion
 (evil-define-operator evil-change-whole-line
   (beg end type register yank-handler)
   "Change whole line."
